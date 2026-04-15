@@ -22,8 +22,8 @@ using namespace std;
 #define mci map<char,int>
 #define mcb map<char,bool>
 
-#define i/p(x) for(auto &it:x)cin>>it
-#define o/p(x) for(auto &it:x) cout<<it<<" "
+#define ip(x) for(auto &it:x)cin>>it
+#define op(x) for(auto &it:x) cout<<it<<" "
 
 
 
