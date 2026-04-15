@@ -18,3 +18,23 @@ The final sorted array is: [1, 2, 5, 5, 6, 9]
 
 
 So the gap starts as ---- n/2 , then n/4 .............. until it becomes 1.
+
+
+
+ while(1)
+        {
+            left = 0,right = gap;
+            while(right<n)
+            {
+                if(nums1[left]>nums1[right])
+                swap(nums1[left],nums1[right]);
+
+                right++;
+                left++;
+            }
+            if(gap==1)
+            break;
+
+            gap = gap/2 + gap%2;
+            // m = gap;
+        } 
