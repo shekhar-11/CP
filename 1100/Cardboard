@@ -1,0 +1,145 @@
+//https://codeforces.com/problemset/problem/1850/E
+
+
+
+/*
+intuition -- solve using --  ax^2 + bx + c = cons;
+
+but a is changing as -- 
+
+each side + w -- there for side -- 4*side + 2w in total
+so area is affected as -- original side + 2w 
+why 2w  
+
+					------------------------------
+						-----------
+
+the bottom is internal picture and outer is cardboard , so the picture has width on both sides so, each side increases by w+w
+
+so now we have (side1+2w)^2 + (side2 + 2w)^2 ............. = cons
+
+after equating we have---
+
+equation as ax^2 + bx +c   = cons;
+
+a = i =1 to n   sum (2w)^2
+a = 4 * n (from above ) as coeff of w^2
+
+b = i =1 to n (2* si * 2(coeff of w)) 
+c we have as sum of (sides^2)
+
+so we have all 
+
+now ax^2 +bx + c = cons
+but all are too large so ---
+ax^2 + bx = cons-c
+
+x(ax+b) = (cons-c)
+(ax+b ) = (cons-c)/x;
+ax = ((cons-c)-bx)/x
+x = ((cons-c)-bx)/x/a
+
+now this is how to find x without overflow
+
+how to get answer --- 
+ax^2 + bx + c = cons
+ax^2 + bx + c<=cons (such width to be present)
+
+so x<= ((cons-c)-bx)/x/a
+
+therefore find the value of farthest x which satisfies x<= res
+
+
+so binary search
+
+
+
+*/
+
+
+
+#include <iostream>
+using namespace std;
+#include <bits/stdc++.h>
+
+
+
+#define ll long long
+#define vi vector<int>
+#define vll vector<ll>
+
+
+#define umii unordered_map<int,int>
+#define mii  map<int,int>
+#define umib unordered_map<int,bool>
+#define mib  map<int,bool>
+#define umll unordered_map<ll,ll>
+#define mll  map<ll,ll>
+#define ulb unodered_map<ll,bool>
+
+#define umci unordered_map<char,int>
+#define umcb unordered_map<char,bool>
+#define mci map<char,int>
+#define mcb map<char,bool>
+
+#define ip(x) for(auto &it:x)cin>>it
+#define op(x) for(auto &it:x) cout<<it<<" "
+
+
+
+
+void solve()
+{
+	ll n,cons;
+	cin>>n>>cons;
+	
+	vll v(n,0);
+	ip(v);
+	
+	ll a = 4 * n;
+	ll b = 0,c = 0;
+	
+	for(int i=0;i<n;i++)
+	{
+	    b = b+ (v[i]*4);
+	    c += (v[i]*v[i]);
+	}
+// 	c = c;
+	ll i = 1,j = 1e18,res=0;
+	while(i<=j)
+	{
+	    ll mid = (i) + (j-i)/2;
+	    
+	    ll ans = ((((cons-c)-b*mid)/mid)/a);
+	    
+	  
+	     if(ans>=mid)
+	     {
+	         res= mid;
+	        i = mid+1;
+	     }
+	    else
+	    j = mid-1;
+	  
+	}
+	cout<<res<<endl;
+	
+// 	cout<<ans<<endl;
+	
+
+
+}
+
+
+
+int main()
+{
+	int t=1;
+	cin>>t;
+	while(t--)solve();
+	return 0;
+}
+
+
+
+
